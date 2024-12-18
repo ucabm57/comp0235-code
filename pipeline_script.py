@@ -25,7 +25,7 @@ def run_merizo_search(input_file, id):
            '/home/almalinux/merizo_search/merizo_search/merizo.py',
            'easy-search',
            input_file,
-           '/home/almalinux/data/cath-4.3-foldclassdb',
+           '/home/almalinux/data/cath-4.3-foldclassdb/cath-4.3-foldclassdb',
            id,
            'tmp',
            '--iterate',
