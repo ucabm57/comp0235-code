@@ -8,8 +8,8 @@ import statistics
 
 cath_ids = defaultdict(int)
 plDDT_values = []
-id = sys.argv[2].rstrip("_search.tsv")
-with open(sys.argv[1]+sys.argv[2], "r") as fhIn:
+id = sys.argv[1].split("_search.tsv")[0]
+with open(sys.argv[1], "r") as fhIn:
     next(fhIn)
     msreader = csv.reader(fhIn, delimiter='\t',) 
     tot_entries = 0
@@ -22,9 +22,9 @@ with open(sys.argv[1]+sys.argv[2], "r") as fhIn:
 
     with open(id+".parsed", "w", encoding="utf-8") as fhOut:
         if len(plDDT_values) > 0:
-            fhOut.write(f"#{sys.argv[2]} Results. mean plddt: {statistics.mean(plDDT_values)}\n")
+            fhOut.write(f"#{sys.argv[1]} Results. mean plddt: {statistics.mean(plDDT_values)}\n")
         else:
-             fhOut.write(f"#{sys.argv[2]} Results. mean plddt: 0\n")
+             fhOut.write(f"#{sys.argv[1]} Results. mean plddt: 0\n")
         fhOut.write("cath_id,count\n")
         for cath, v in cath_ids.items():
             fhOut.write(f"{cath},{v}\n")
