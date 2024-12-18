@@ -43,7 +43,7 @@ def run_merizo_search(input_file, id):
            '-d',
            'cpu',
            '--threads',
-           '1'
+           '4'
            ]
     logging.info(f'STEP 1: RUNNING MERIZO: {" ".join(cmd)}')
     p = Popen(cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE)
@@ -68,5 +68,5 @@ def pipeline(filepath, id):
 
 if __name__ == "__main__":
     pdbfiles = read_dir(sys.argv[1])
-    p = multiprocessing.Pool(1)
-    p.starmap(pipeline, pdbfiles[:10])
+    p = multiprocessing.Pool(3)
+    p.starmap(pipeline, pdbfiles)
