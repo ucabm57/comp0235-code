@@ -1,7 +1,7 @@
 import sys
 from subprocess import Popen, PIPE
 import glob
-import os
+import subprocess
 import multiprocessing
 import logging
 
@@ -19,7 +19,16 @@ def run_parser(input_file):
     logging.info(out.decode("utf-8"))
     if err:
         logging.error(err.decode("utf-8"))
-    # 上传结果
+    # upload the parsed file to hdfs
+    output_dir = "/home/almalinux/data/output/"
+    files_to_move = [f"{input_file}.parsed", f"{input_file}_search.tsv", f"{search_file}_segment.tsv"]
+    for file in files_to_move:
+        result = subprocess.run(["mv", file, output_dir],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        if result.returncode == 0:
+            logging.info(f"Moved {file} to {output_dir}")
+        else:
+            logging.error(f"Failed to move {file}: {result.stderr}")
 
 def run_merizo_search(input_file, id):
     cmd = ['python3',
