@@ -33,7 +33,9 @@ def run_merizo_search(input_file, id):
            '-d',
            'cpu',
            '--threads',
-           '1'
+           '1',
+           '--merizo_output',
+           '/home/almalinux/data/output'
            ]
     logging.info(f'STEP 1: RUNNING MERIZO: {" ".join(cmd)}')
     p = Popen(cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE)
@@ -47,7 +49,7 @@ def read_dir(input_dir):
     file_ids = list(glob.glob(input_dir+"*.pdb"))
     analysis_files = []
     for file in file_ids:
-        id = file.rsplit('/', 1)[-1]
+        id = file.rsplit('/', 1)[-1].split('.')[0]
         analysis_files.append([file, id, sys.argv[2]])
     return(analysis_files)
 
