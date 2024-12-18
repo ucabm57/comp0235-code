@@ -55,6 +55,7 @@ def read_dir(input_dir):
 def pipeline(filepath, id):
     run_merizo_search(filepath, id)
     run_parser(id)
+    logging.info(f'-------------Finished processing {id}-----------------')
 
 if __name__ == "__main__":
     pdbfiles = read_dir(sys.argv[1])
