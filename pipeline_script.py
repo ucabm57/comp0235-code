@@ -21,7 +21,7 @@ def run_parser(input_file):
         logging.error(err.decode("utf-8"))
     # upload the parsed file to hdfs
     output_dir = "/home/almalinux/data/output/"
-    files_to_move = [f"{input_file}.parsed", f"{input_file}_search.tsv", f"{search_file}_segment.tsv"]
+    files_to_move = [f"{input_file}.parsed", f"{input_file}_search.tsv", f"{input_file}_segment.tsv"]
     for file in files_to_move:
         result = subprocess.run(["mv", file, output_dir],
             stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
