@@ -19,12 +19,13 @@ def run_parser(input_file):
     logging.info(out.decode("utf-8"))
     if err:
         logging.error(err.decode("utf-8"))
-    # upload the parsed file to hdfs
+
+def move_files(input_file):
     output_dir = "/home/almalinux/data/output/"
     files_to_move = [f"{input_file}.parsed", f"{input_file}_search.tsv", f"{input_file}_segment.tsv"]
     for file in files_to_move:
         result = subprocess.run(["mv", file, output_dir],
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         if result.returncode == 0:
             logging.info(f"Moved {file} to {output_dir}")
         else:
@@ -64,6 +65,7 @@ def read_dir(input_dir):
 def pipeline(filepath, id):
     run_merizo_search(filepath, id)
     run_parser(id)
+    move_files(id)
     logging.info(f'-------------Finished processing {id}-----------------')
 
 if __name__ == "__main__":
