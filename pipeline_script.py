@@ -12,7 +12,7 @@ logging.basicConfig(filename='pipeline.log', level=logging.INFO,
 def run_parser(input_file):
     search_file = input_file+"_search.tsv"
     logging.info(f'Running parser on {search_file}')
-    cmd = ['python', './results_parser.py', search_file]
+    cmd = ['python', '/home/almalinux/pipeline/results_parser.py', search_file]
     logging.info(f'STEP 2: RUNNING PARSER: {" ".join(cmd)}')
     p = Popen(cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE)
     out, err = p.communicate()
